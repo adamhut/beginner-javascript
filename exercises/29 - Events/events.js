@@ -16,12 +16,13 @@ butts.removeEventListener('click', handleClick);
 
 // Listen on multiple items
 const buyButtons = document.querySelectorAll('button.buy');
-
+console.log(buyButtons);
 function handleBuyButtonClick(event) {
-  console.log('You clicked a button!');
+  console.log('You clicked a button2!');
+  console.log(event);
   const button = event.target;
   // console.log(button.textContent);
-  // console.log(parseFloat(event.target.dataset.price));
+  console.log(parseFloat(event.target.dataset.price));
   console.log(event.target);
   console.log(event.currentTarget);
   console.log(event.target === event.currentTarget);
@@ -46,7 +47,7 @@ window.addEventListener(
 );
 
 const photoEl = document.querySelector('.photo');
-
+//mousemove ,mouseout
 photoEl.addEventListener('mouseenter', e => {
   console.log(e.currentTarget);
   console.log(this);
