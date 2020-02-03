@@ -2,16 +2,101 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta char  set="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title></title>
   <link rel="stylesheet" href="../base.css">
+
+  <style >
+    .turt{
+      position: relative;
+      --x :10px;
+      --y :10px;
+      --rotateX: '0';
+      --rotate:'0';
+      transform: translateX(var(--x)) translateY(var(--y)) rotateY(var(--rotateX)) rotate(var(--rotate));
+      transition: transform  0.2s;
+
+    }
+
+  </style >
 </head>
+
 
 
 <body>
   <img width="200" src="./turtle.png" alt="Turt" class="turt">
 
+
+  <script>
+    const turtle = document.querySelector('.turt');
+    
+    let x = 0;
+    let y = 0;
+    const speed = 5;
+
+    let flipped = false;
+
+    let rotate = 0;
+    function handleKeyDown(event){
+      // console.log(event.key)
+      //if it is not an arrow key we do not care
+      if(!event.key.includes('Arrow'))
+      {
+          return ;
+      }
+
+      console.log(event.key);
+
+      switch(event.key){
+          case 'ArrowUp':
+              y = y-1;
+              rotate = -90;
+              break 
+          case 'ArrowDown':
+              y = y+1;
+              rotate = 90
+              break ;
+          case 'ArrowLeft':
+              x = x-1;
+              flipped = true;
+              rotate = 0;
+              break ;
+
+          case 'ArrowRight':
+              x = x+1;
+              flipped = false;
+              rotate = 0;
+              break ;
+          default:
+              console.log('this is not a valid move');
+              break;
+      }
+
+        // console.log(x,y);
+
+        // turtle.style.background='red';  
+        // the following will not work due to the x and y are custome 
+        // property we need to use set attribute
+        // turtle.style['--x'] = `${x}px`;
+        // turtle.style['--y'] = `${y}px`;
+
+        turtle.setAttribute('style',`
+          --x : ${x * speed}px ;
+          --y : ${y* speed}px;
+          --rotateX: ${flipped? '180deg':0};
+          --rotate: ${rotate}deg;
+        `);
+
+    }
+
+    // handle key down
+    window.addEventListener('keydown',handleKeyDown)
+    console.log(turtle);
+
+
+
+  </script>
 </body>
 
 </html>
