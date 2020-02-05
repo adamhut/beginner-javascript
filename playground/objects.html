@@ -28,13 +28,20 @@
       },
       sayHello: function (greeting = 'Hey') {
         return `${greeting} ${this.name}`;
-      }
+      },
+      helloAgain(){
+        return 'again';
+      },
+      hello:()=>{
+        console.log(this,wes.job);
+      },
     };
 
     wes.job = 'Web Developer';
     wes.age = 50;
-
+    console.log(wes.helloAgain());
     console.log(wes.age);
+    console.log(wes['really cool'],'dd')
     // const properyToCheck = prompt('What do you want to check?');
     // console.log(properyToCheck);
     // console.log(wes[properyToCheck]);
