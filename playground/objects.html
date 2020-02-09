@@ -83,7 +83,10 @@
     // person3.first = 'Larry';
     // console.log(person3.first);
     // console.log(person1.first);
+    // way to make a copy of object but it only do a one level deep no further *shodow copy
     // const person3 = { ...person1 };
+    // const person3  = Object.assign({},person1);
+    // the following is doing a complete copy
     const person3 = _.cloneDeep(person1);
     person3.first = 'Larry';
 

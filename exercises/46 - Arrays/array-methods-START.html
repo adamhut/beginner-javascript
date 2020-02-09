@@ -12,7 +12,36 @@
 
 <body>
   <script>
+    // Array of
+    let newArray = Array.of('web','kait');
+    console.log(newArray);
+
+    newArray = Array.of(...'wes');
+    console.log(newArray);
+
+    // Array From
+    // Make a founciton that creates a reange form x to y with Array.from
+    function createRange(start , end){
+      let range = Array.from({ length : end - start },function(item,index){
+        return index + start; 
+      })
+      return range;
+
+    }
+    console.log(createRange(3,7));
+
+    let range  = Array.from({length:10},function(item,index){
+      return 'wes';
+    })
+    console.log(range);
+
+    //Check if the last array you creaets is really an array with Array.isArray
+    console.log(Array.isArray(range),'is Array');
+
+    //Takee the meats object and make three array with object.entries(), Object.keys, Object.values()
+
     const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
+    
 
     const buns = ['egg', 'wonder', 'brioche'];
 
@@ -51,6 +80,30 @@
     // Check if the last array you created is really an array with Array.isArray();
 
     // Take the meats object and make three arrays with Object.entries(), Object.keys, Object.values()
+    console.log(Object.entries(meats));
+    console.log(Object.keys(meats));
+    console.log(Object.values(meats));
+
+    Object.values(meats).forEach((qty)=>{
+        console.log(qty);
+    });  
+
+    Object.keys(meats).forEach((meat)=>{
+        console.log(meat);
+    });
+
+    Object.entries(meats).forEach((entry)=>{
+        // const key = entry[0];
+        // const value = entry[1];
+        const [key,value] = entry
+        console.log(key,value);
+    });
+
+    Object.entries(meats).forEach(([key,value])=>{
+        console.log(key,value);
+    });
+
+
 
     /*
       Instance Methods

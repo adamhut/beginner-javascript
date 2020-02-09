@@ -18,13 +18,30 @@
     console.log(names.length);
     console.log(names[names.length - 1]);
 
+   
+
     names.push('lux');
     console.log(names);
     const names2 = [...names, 'lux'];
-    names.unshift('poppy');
+    names.unshift('poppy');// add to front of array
     console.log(names);
     const names3 = ['poppy', ...names];
     console.log(names3);
+
+    //mutation method - Do change the original array
+    const numbers =[1,2,3,4,5,6,7,8,9];
+    numbers.reverse();
+    console.log(numbers);
+
+    // Any time you want to use a mutation method and NOT to change the original array
+    // we need to take a copy of the array
+    const newNumbers = [...numbers].reverse();
+    console.log(newNumbers);
+
+    console.log(numbers);
+    numbers.splice(3,2); //index 3 and take 2
+    console.log(numbers);
+  
 
     const bikes = ['bianchi', 'miele', 'panasonic', 'miyata'];
     const newBikes = [
@@ -32,6 +49,8 @@
       'benotto',
       ...bikes.slice(2)
     ];
+    console.log(newBikes);
+    console.log(newBikes.reverse());//mutable
 
     const newBikes2 = [
       ...newBikes.slice(0, 3),
@@ -59,6 +78,11 @@
       // return our new array
     }
 
+    let deletedComment = deleteComment(123,comments);
+    console.log(deletedComment,'deleted comment');
+
+
+
     const kaitIndex = names.findIndex(name => name === 'kait');
     const newNamesWithOutKait = [
       // get everything up to kait index
@@ -66,7 +90,15 @@
       // everything after Kait index
       ...names.slice(kaitIndex + 1)
     ];
+
+     const flatNewNamesWithOutKait = [
+      // get everything up to kait index
+      names.slice(0, kaitIndex),
+      // everything after Kait index
+      names.slice(kaitIndex + 1)
+     ].flat();
     console.log(newNamesWithOutKait);
+    console.log(flatNewNamesWithOutKait,'using flat funciton');
 
     // const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
