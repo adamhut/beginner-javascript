@@ -110,23 +110,69 @@
     */
 
     // Display all bun types with " or " - use join()
-
+    console.log(buns.join(','), 'Array.join')
     // We have a string "hot dogs,hamburgers,sausages,corn" - use split() to turn it into a string
 
+    const foodString = 'hot dogs, hamburgers,sausages,corn';
+    console.log(foodString.split(','));
+
     // take the last item off toppings with pop()
+    let lastItem = toppings.pop()
+    console.log(lastItem);
+    console.log(toppings);
+
     // add it back with push()
+     console.log(toppings.push(lastItem));
+     console.log(toppings);
     // take the first item off toppings with shift()
+    let firstItem = toppings.shift()
     // add it back in with unshift()
+    console.log(toppings.unshift(firstItem));
+    console.log(toppings);
     // Do the last four,but immutable (with spreads and new variables)
+
+    let newTopping  = toppings.slice(0,toppings.length);
+    
+    newTopping = [...newTopping , toppings[toppings.length-1]];
+    console.log(newTopping);
 
 
     // Make a copy of the toppings array with slice()
+    const toppingsCopy = toppings.slice(0);
+    toppings[0]='mush body';
+    console.log(toppings);
+    console.log(toppingsCopy);
+
     // Make a copy of the toppings array with a spread
+    const toppingsCopy2 = [...toppings];
     // take out items 3 to 5 of your new toppings array with splice()
+    toppingsCopy.splice(3,5);
+    console.log(toppingsCopy);
     // find the index of Avocado with indexOf() / lastIndexOf()
+
+    const avoIndex = toppings.indexOf('Avocado');
+    console.log(avoIndex);
+    const wes = {name:'wes'};
+    const people = [{name:'wes'},wes]
+    console.log(people);
+    console.log(people.indexOf(wes));
     // Check if hot sauce is in the toppings with includes()
+    [1,2,3,4].inlcudes(4);
+
+    const isToppings   = toppings.inlcudes('Hot Sauce');
+    console.log(isToppings);
+
+
     // add it if it's not
+    if(!isToppings)
+    {
+      toppings.push('Hot Sauce')
+    }
+    console.log(toppings);
     // flip those toppings around with reverse()
+    toppings.reverse(); //this mutable function.
+
+    const reverseTopping = [...toppings.reverse()]; //
 
     /*
       Callback Methods
