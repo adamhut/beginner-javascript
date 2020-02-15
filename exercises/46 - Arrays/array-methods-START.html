@@ -157,9 +157,10 @@
     console.log(people);
     console.log(people.indexOf(wes));
     // Check if hot sauce is in the toppings with includes()
-    [1,2,3,4].inlcudes(4);
+     [1,2,3,4].includes(4);
 
-    const isToppings   = toppings.inlcudes('Hot Sauce');
+    
+    const isToppings   = toppings.includes('Hot Sauce');
     console.log(isToppings);
 
 
@@ -179,16 +180,120 @@
       Callback Methods
     */
 
-    // find the first rating that talks about a burger with find()
-    // find all ratings that are above 2 with filter()
-    // find all ratings that talk about a burger with filter()
-    // Remove the one star rating however you like!
+    // function findBurgRating(singleFeedback,i,){   
+    //     return  singleFeedback.comment.includes('burg');
+    // }
+    // or
+    // const findBurgRating = function(singleFeedback ) {
+    //     return  singleFeedback.comment.includes('burg');
+    // }
+    // or
+    const findBurgRating =(singleFeedback)=> {
+      return singleFeedback.comment.includes('burg');
+    }
+    // can simplfy to
+    // const findBurgRating = (singleFeedback) =>  singleFeedback.comment.includes('burg');
+    // const findSmoothieRating = (singleFeedback) =>  singleFeedback.comment.includes('Smoothie');
 
+    function findByWord(word)
+    {
+        return function(singleFeedback){
+            return singleFeedback.comment.includes(word);
+        }
+    }
+
+    const util = {
+         findBurgRating: function(singleFeedback) {
+              return  singleFeedback.comment.includes('burg');
+          }
+    }
+
+
+    // find the first rating that talks about a burger with find()
+    // const burgRating = feedback.find(rating => {
+    //     rating.comment.inlcudes('burg')
+    // });
+    const burgRating = feedback.find(findBurgRating);
+    console.log(burgRating);
+
+    // find all ratings that are above 2 with filter()
+    const goodReviews = feedback.filter(singleFeedback=>{
+        
+        return singleFeedback.rating > 2;
+        //or
+        // if(singleFeedback.rating >=2)
+        // {
+        //   return true;
+        // }
+        // return false;
+    });
+    function filterByMinRating(minRating) {
+        return function (singleFeedback) {
+          return singleFeedback.rating > minRating;
+        }
+    }
+    console.table(goodReviews);
+
+    // find all ratings that talk about a burger with filter()
+    const burgRatings = feedback.filter(findByWord('burg'));
+    console.table(burgRatings);
+    
+    // Remove the one star rating however you like!
+    
+    const legitRatings = feedback.filter(single=> single.rating !== 1 );
+    // const legitRatings = feedback.filter(filterByMinRating('1'));
+    console.table(legitRatings);
+    
     // check if there is at least 5 of one type of meat with some()
+    const isThereEnoughOfAtLeastOneMeat = Object.values(meats).some(meatValue => meatValue >=5);
+    console.log(isThereEnoughOfAtLeastOneMeat);
+
     // make sure we have at least 3 of every meat with every()
+    const isThereEnoughOfEveryMeat = Object.values(meats).every(meatValue => meatValue >= 3);
+    console.log(isThereEnoughOfEveryMeat);
+
     // sort the toppings alphabetically with sort()
+    const numbers = [1,100,2,200,3,400,155];
+    const numberSorted= numbers.sort();
+    console.log(numberSorted);
+    const rightSortedNumber = numbers.sort((firstItem, secondItem) => {
+        return secondItem - firstItem;
+        //or
+        return  firstItem - secondItem;
+        
+        if(firstItem > secondItem){
+          return 1;
+        }else  if (firstItem < secondItem) {
+          return -1;
+        }
+        return 0
+
+    });
+
+    console.log(rightSortedNumber);
+    console.log(toppings.sort());
+
     // sort the order totals from most expensive to least with .sort()
+    function numberSort(a,b){
+      return a - b ;
+    }
+    
+    console.log(orderTotals.sort(numberSort));
+
     // Sort the prices with sort()
+    console.log(Object.entries(prices));
+    const productSortedByPrice = Object.entries(prices).sort( function(a,b){
+      const aPrice = a[1];
+      const bPrice = b[1];
+      return bPrice - aPrice;
+      // debugger;
+      return a[1]-b[1];
+    });
+    console.log(productSortedByPrice);
+    // Object.fromEnteries
+    
+    console.table(Object.fromEntries(productSortedByPrice));
+
 
     /*
       Looping Methods (next)
