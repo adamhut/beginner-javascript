@@ -200,8 +200,36 @@
         name:`${person.names.first} ${person.names.last}`,
       };
 
-    })
+    });
+    console.table(cleanPeople);
 
+    const over40  = cleanPeople.filter(function(person){
+        return person.age>40;
+    });
+
+    console.log(over40);
+
+    const student = students.find(stud => stud.id ==='565a');
+    console.log(student);
+
+    function findById(id){
+      return function isStudent(student){
+        return student.id === id;
+      }
+    }
+    
+    const student2 = students.find(findById('565a'));
+    console.log(student2);
+
+    function findByProp(prop, propWeAreLookingFor){
+      return function isStudent(student){
+        return student[prop] === propWeAreLookingFor;
+      }
+    }
+    const student3 = students.find(findByProp('id','565a'));
+    const student4 = students.find(findByProp('first_name','Micki'));
+    console.log(student3);
+  
 
   </script>
 </body>
