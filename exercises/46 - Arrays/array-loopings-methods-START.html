@@ -229,8 +229,48 @@
     const student3 = students.find(findByProp('id','565a'));
     const student4 = students.find(findByProp('first_name','Micki'));
     console.log(student3);
-  
+    
+    //reduce 
+    console.clear();
 
+    function tallyNumber(tally,currentTotal){
+        console.log(`current tally is ${tally}`);
+        console.log(`current is ${currentTotal}`);
+        //return the current tally PLUS the amount of this order
+        return tally+currentTotal;
+
+    }
+
+    let allOrders  = orderTotals.reduce((carry, current)=>{
+        carry = carry + current;
+        return carry;
+    },0)
+
+    //or 
+    allOrders = orderTotals.reduce(tallyNumber,0)
+    console.log(allOrders);
+
+    function inventoryReudcer(carry,current){
+
+        //increamet the type by one
+        carry[current.type] = carry[current.type] + 1 || 1;
+
+        // return the totas , so the next loop can use it
+        return carry;
+    }
+
+    let totalInventory =inventory.reduce(inventoryReudcer,{});
+
+    console.log(totalInventory);
+
+    let totalInventoryPrice = inventory.reduce((carry,current)=>{
+
+        carry[current.type] = carry[current.type] + current.price || current.price;
+
+        return carry;
+    },{});
+
+    console.log(totalInventoryPrice);
   </script>
 </body>
 
