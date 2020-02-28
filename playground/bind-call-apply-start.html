@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Bind Call and Apply!</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+    <p>Hey</p>
+    <button>Click me</button>
+    <div class="wrapper">
+        <p>Hey im in a wrapper</p>
+    </div>
+    <script>
+        const person={
+            name:'adam huang',
+            sayHi: function(){
+                console.log(this);
+                console.log(`Hi ${this.name} `);
+                return `Hi ${this.name} `;
+            }
+        }
+
+        // see the differenc when you uncomment the following
+        let sayHi = person.sayHi;
+        sayHi();
+        //
+        sayHi = person.sayHi.bind(person);
+        sayHi();
+
+        const jenna = {name:'Jenna'}
+        sayHi = person.sayHi.bind(jenna);
+        sayHi();
+
+        sayHi = person.sayHi.bind( {name:'Herry'});
+        sayHi();
+        // const adam = new person();
+        // person.sayHi();
+        // sayHi();
+
+        //QuerySelector example
+        //by calling bind against querySelect , we say when the $ function is run, use `document` as this value
+        //from 
+        //const $ = document.querySelector;
+        //to
+        const $ = document.querySelector.bind(document);
+        const lookFor = document.querySelectorAll.bind(document);
+
+        const wrapper = document.querySelector('.wrapper');
+        const p =wrapper.querySelector('p');
+
+        console.log(p);
+        console.log(lookFor('p'));
+
+        const bill ={
+            total:1000,
+            calculate:function(taxRate){
+                return this.total+ (this.total * taxRate);
+            },
+            describe:function(mealType, drinkType,taxRate){
+                console.log(`you meal of ${mealType} with a drink of ${drinkType} was ${this.calculate(taxRate)}`)
+            }
+        }
+
+        const total = bill.calculate(0.13);
+        console.log(total); 
+
+        let calc = bill.calculate;
+        console.log(calc(0.13),'No Bind at All')
+
+        calc = bill.calculate.bind(bill);
+        console.log(calc(0.13),'bind it ')
+
+        calc = bill.calculate.bind({total:500});
+        console.log(calc(0.13),'bind it ')
+
+        calc = bill.calculate.bind({total:500},0.06);
+        console.log(calc(),'bind it ')
+
+
+        const total2 = bill.calculate.call({total:500},0.07);
+        console.log(total2,' bind  and call it ')
+
+        const total3 = bill.calculate.apply({total:200},[0.6]);
+        console.log(total3,' bind and apply it ')
+
+        bill.describe('happy meal','milk',0.1)
+
+        const myMeal = bill.describe.call(bill,'Big Mac meal','coke',0.1)
+
+        const myMeal2 = bill.describe.apply(bill,['Big Mac meal','coke',0.1])
+    </script>
+</body>
+
+</html>

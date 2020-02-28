@@ -16,8 +16,10 @@
     console.dir(myDate);
     console.log(myDate.getFullYear());
 
-    const names = new Array('wes', 'kait');
-    const wes = new Object({ name: 'wes' });
+    const names = new Array('wes', 'kait'); // equals to ['wes','kait']
+    console.log(typeof names);
+    console.log(names instanceof Array);
+    const wes = new Object({ name: 'wes' });// equals to {name:'wes'}
     const span = document.createElement('span');
 
     String.prototype.sarcastic = function () {
