@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Async Await</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+    <script>
+        function makePizza(toppings){
+
+            const pizzaPromise  = new Promise(function(resolve,reject){
+                // reject if people try with pineapple
+
+                if(toppings.includes('pineapple'))
+                {
+                    reject('Serioursly?');
+                    return ;
+                }
+
+                const amountOfTimeToBake = 500 + (toppings.length * 200)
+                //wait one second for pizza to cook
+
+                setTimeout(() => {
+                    //when you are ready you can resolve this promises
+                    resolve(`here is your pizza with the topping ${toppings.join(' ')}`);
+                    
+                }, amountOfTimeToBake);
+
+                //if something went wrong , we cam reject this promises
+
+            });
+
+
+            return pizzaPromise;
+
+        }
+
+
+
+        function wait(ms = 0){
+            return new Promise(function(resolve){
+                setTimeout(resolve,ms);
+            });
+        }
+
+        async function go(){
+            console.log('starting');
+            await wait(2000);
+            console.log('running');
+            await wait(2000);
+            console.log('ending');
+
+        }
+
+        async function makeDinner(){
+            // const pizza1  = await makePizza(['pepperoini']);
+            // const pizza2 = await makePizza(['mushrooms']);
+
+            const pizzaPromises1 = makePizza(['pepperoini']);
+            const pizzaPromises2 = makePizza(['mushrooms']);
+            // const pizzas = await Promise.all([pizzaPromises1,pizzaPromises2]);
+            console.log(pizzas);
+
+            const pizzaPromises1 = makePizza(['pepperoini']);
+            const pizzaPromises2 = makePizza(['mushrooms']);
+            const [peo, mush] = await Promise.all([pizzaPromises1,pizzaPromises2]);
+            console.log(peo, mush);
+
+
+
+        }
+
+        
+
+        makeDinner();
+
+
+        go();
+
+        //funciton declaration
+        async function fd(){}
+
+        //arrow funciton
+        const arrowFn = async ()=>{}
+
+        //callback funciton
+        window.addEventListener('click',async function(){
+
+        })
+
+        const person ={
+            //method
+            sayHi: async function(){
+
+            },
+            //method shorthand
+            async sayHello(){
+
+            },
+            //function property
+            sayHey: async()=>{
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>

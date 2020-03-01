@@ -13,6 +13,13 @@
         function makePizza(toppings){
 
             const pizzaPromise  = new Promise(function(resolve,reject){
+                // reject if people try with pineapple
+
+                if(toppings.includes('pineapple'))
+                {
+                    reject('Serioursly?');
+                    return ;
+                }
 
                 const amountOfTimeToBake = 500 + (toppings.length * 200)
                 //wait one second for pizza to cook
@@ -70,7 +77,8 @@
                 console.log('ahh got it last pizza');
                 console.log(pizza);
                 
-            });
+            })
+            .catch(handleError);
         // Run them Concurrently
         const pizzaPromise1 = makePizza(['hot peppers', 'onion', 'feta']);
         const pizzaPromise2 = makePizza(['one', 'two', 'three', 'four', 'one', 'two', 'three', 'four', 'one', 'two',
@@ -113,6 +121,28 @@
              console.log(pizza);
          })
         console.log(canadianPromise);
+
+        function handleError(err){
+            console.log('ohh no');
+            console.log(err);
+        }
+
+        makePizza(['cheese','pineapple'])
+            .then(pizza=>{
+                console.log(pizza,'2');
+            })
+            .catch(handleError);
+
+        const p1 = makePizza(['pep']);
+        const p2 = makePizza(['pineapple']);
+
+
+        const dinnerPromise2 = Promise.allSettled([p1,p2]);
+
+        dinnerPromise2.then(results=>{
+            console.log(results);
+        })
+
     </script>
 </body>
 
