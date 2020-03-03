@@ -67,5 +67,5 @@ function displayRecipes(recipes)
 }
 
 form.addEventListener('submit',handleSubmit)
-
+//on page load runing 
 fetchAndDisplay('pizza');
