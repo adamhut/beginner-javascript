@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>APIs</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+    <p class="user"></p>
+
+    <script>
+        const baseEndPoint = 'https://api.github.com';
+
+        const usersEndpoint = `${baseEndPoint}/users/`;
+
+        const userEl = document.querySelector('.user');
+
+
+        function handleError(err) {
+            console.log('oh no');
+            console.log(err);
+            userEl.textContent = 'Unable to load the content';
+        }
+
+        async function displayUser(name) {
+
+            userEl.textContent = 'Loading...';
+            const response = await fetch(`${usersEndpoint}${name}`);
+
+            const data = await response.json();
+
+            console.log(data);
+            console.log(data.location);
+            console.log(data.name);
+            userEl.textContent = `
+                    ${data.name} - ${data.blog}
+                `
+            // console.log(adamPromise);
+
+
+        }
+
+        displayUser('adamhut').catch(handleError);
+
+        // const adamPromise = fetch(usersEndpoint);
+        //     // console.log(adamPromise);
+        //     adamPromise
+        //         .then(response=>{              
+        //             console.log(response);
+        //             return response.json()
+        //         })
+        //         .then(data=>{
+        //             console.log(data);
+        //             console.log(data.location);
+        //             console.log(data.name);
+        //             userEl.textContent = `
+        //                 ${data.name} - ${data.blog}
+        //             `
+        //         })
+        //         .catch(handleError)
+    </script>
+
+</body>
+
+</html>
