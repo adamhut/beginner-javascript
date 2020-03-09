@@ -1,8 +1,9 @@
 import wait from 'waait';
 import faker from 'faker';
 import {name} from "faker";
-import {formatDistance} from 'date-fns';
-
+import {formatDistance,format} from 'date-fns';
+import axios from 'axios';
+import {intersection} from 'lodash'
 
 
 console.log(`hello ${faker.name.firstName()}`);
@@ -44,3 +45,33 @@ go()
 
 //January the 12th 2020
 const date  = new Date();
+
+const formatted  = format(date,`LLLL 'the' do y`)
+console.log(formatted);
+
+async function getJoke(){
+  // const res = await axios.get('https://icanhazdadjoke.com',{
+  //     headers:{
+  //       Accept:'application/json',
+  //     }
+  // });
+
+  // console.log(res);
+  const {data} = await axios.get('https://icanhazdadjoke.com', {
+     headers: {
+       Accept: 'application/json',
+     }
+   });
+
+   console.log(data);
+}
+
+getJoke();
+
+
+const a = [1,2,3,4,5,6,7,8,9]
+const b = [5, 3, 11, 7, 11,33, 44, 55,66];
+
+const sameValues = intersection(a,b);
+
+console.log(sameValues);
