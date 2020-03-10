@@ -3,8 +3,8 @@ import faker from 'faker';
 import {name} from "faker";
 import {formatDistance,format} from 'date-fns';
 import axios from 'axios';
-import {intersection} from 'lodash'
-
+import {isEqual,intersection} from 'lodash'
+import to from 'await-to-js'
 
 console.log(`hello ${faker.name.firstName()}`);
 
@@ -63,7 +63,7 @@ async function getJoke(){
      }
    });
 
-   console.log(data);
+   console.log(data.joke);
 }
 
 getJoke();
@@ -75,3 +75,39 @@ const b = [5, 3, 11, 7, 11,33, 44, 55,66];
 const sameValues = intersection(a,b);
 
 console.log(sameValues);
+
+const person1 = {name:'wes'} 
+const person2 = { name: "wes" }; 
+
+console.log(person1 == person2);
+
+console.log(isEqual(person1 , person2));
+
+async function checkIfNameIsCool(firstName){
+
+    return new Promise(function(resolve,reject){
+        if(firstName=='wes')
+        {   
+            return resolve('Cool Name');
+        }
+
+        return reject(new Error('not a cool name'));
+    });
+
+}
+
+async function checkName()
+{
+  // const nameDesc = await checkIfNameIsCool('wes');
+
+    const [err,successValue] = await to(checkIfNameIsCool('googo'));
+    if(err)
+    {
+        //Deal with it
+        console.log('it is wrong' , err)
+    }else{
+        console.log(successValue);
+    }
+    // console.log(nameDesc);
+}
+checkName();
